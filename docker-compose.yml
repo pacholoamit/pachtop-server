@@ -1,0 +1,8 @@
+version: "3.7"
+
+services:
+  pachtop-update-server:
+    build: .
+    container_name: pachtop-update-server
+    ports:
+      - "8000:8000"
