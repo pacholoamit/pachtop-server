@@ -1,4 +1,4 @@
-FROM continuumio/miniconda:latest
+FROM continuumio/miniconda3
 
 # Copy everything into the folder and move on from there
 WORKDIR /app
@@ -17,4 +17,4 @@ COPY *.py .
 EXPOSE 5000
 
 # Run the Update Server
-ENTRYPOINT ["conda", "run", "-n", "pachtop-update-server", "python", "main.py"]
+ENTRYPOINT ["conda", "run", "--no-capture-output","-n", "pachtop-update-server", "python", "main.py"]

@@ -2,6 +2,8 @@ from flask import Blueprint, Flask
 from helpers import time_cache
 import requests
 
+
+print("Running Server")
 app = Flask(__name__)
 tauri_releases_bp = Blueprint('releases', __name__, url_prefix='/releases', template_folder='blueprints/tauri_releases/templates')
 
@@ -69,5 +71,5 @@ def pachtop_desktop_page():
 
 if __name__ == '__main__':
     app.register_blueprint(tauri_releases_bp)
-    app.run(debug=False)
+    app.run(debug=True)
     
