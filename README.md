@@ -44,4 +44,4 @@ services:
 
 2. Run `docker-compose up -d` to start the update server.
 
-3. If you visit `http://localhost:5000/releases/pachtop/darwin-x86_64/3.0.3`, you should receive a JSON response that allows Pachtop to be updated
+3. If you visit `http://localhost:8000/releases/pachtop/darwin-x86_64/3.0.3`, you should receive a JSON response that allows Pachtop to be updated
