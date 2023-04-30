@@ -23,7 +23,7 @@
 <br/>
 <br/>
 
-> This is the update server for Pachtop. This server is responsible for checking for updates and downloading the latest version of Pachtop.
+> This is the update server for Pachtop. This server is responsible for serving updates in the Pachtop Desktop application.
 
 ## Usage:
 
