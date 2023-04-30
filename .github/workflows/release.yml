@@ -19,7 +19,7 @@ jobs:
       matrix:
         include:
           - dockerfile: ./Dockerfile
-            image: ghcr.io/pacholoamit/pachtop
+            image: ghcr.io/pacholoamit/pachtop-update-server
             context: .
 
     permissions:
