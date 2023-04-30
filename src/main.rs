@@ -13,9 +13,9 @@ fn rocket() -> _ {
         .user_agent("reqwest")
         .build()
         .expect("reqwest client could not be built");
+
     rocket::build()
         .manage(reqwest_client)
         .manage(pachtop_release)
-        .attach(rocket_csrf::Fairing::default())
         .mount(releases::BASE, releases::routes())
 }
