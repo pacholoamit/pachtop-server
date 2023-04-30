@@ -20,3 +20,7 @@ tokio = { version = "1.25.0", features = ["sync"] }
 # see https://api.rocket.rs/v0.5-rc/rocket_db_pools/ for all async databases
 # see https://api.rocket.rs/v0.5-rc/rocket_sync_db_pools/ for all sync databases
 # argon2 = "0.4"
+
+[[bin]]
+name = "pachtop-update-server"
+path = "src/main.rs"
