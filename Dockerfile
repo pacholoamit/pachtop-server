@@ -8,7 +8,7 @@ RUN rm src/*.rs
 
 ADD . ./
 
-RUN rm ./target/release/deps/pachtop-update-server*
+RUN rm ./target/release/deps/*
 RUN cargo build --release
 
 
