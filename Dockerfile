@@ -1,35 +1,39 @@
-# Use the official Rust image as the parent image
-FROM rust:1.69 AS build
+FROM rust:1.69 as builder
 
-# Set the working directory to /app
-WORKDIR /app
+RUN USER=root cargo new --bin pachtop-update-server
+WORKDIR ./pachtop-update-server
+COPY ./Cargo.toml ./Cargo.toml
+RUN cargo build --release
+RUN rm src/*.rs
 
-# Copy the Cargo.toml and Cargo.lock files to the container
-COPY Cargo.toml Cargo.lock ./
+ADD . ./
 
-# Build and cache dependencies separately from the application code
+RUN rm ./target/release/deps/*
 RUN cargo build --release
 
-# Copy the application code to the container
-COPY src ./src
 
-# Build the application
-RUN cargo build --release
+FROM debian:buster-slim
+ARG APP=/usr/src/app
 
-# Use the official Debian Slim image as the base image for the final image
-FROM debian:bullseye-slim
+RUN apt-get update \
+    && apt-get install -y ca-certificates tzdata \
+    && rm -rf /var/lib/apt/lists/*
 
-# Set the working directory to /app
-WORKDIR /app
-
-# Copy the application binary from the build stage to the final image
-COPY --from=build /app/target/release/pachtop-update-server .
+EXPOSE 8000
 
 ENV ROCKET_ADDRESS=0.0.0.0
 ENV ROCKET_ENV=release
+ENV APP_USER=appuser
 
-# Expose the port on which the application will listen
-EXPOSE 8000
+RUN groupadd $APP_USER \
+    && useradd -g $APP_USER $APP_USER \
+    && mkdir -p ${APP}
 
-# Start the application when the container starts
+COPY --from=builder /pachtop-update-server/target/release/pachtop-update-server ${APP}/pachtop-update-server
+
+RUN chown -R $APP_USER:$APP_USER ${APP}
+
+USER $APP_USER
+WORKDIR ${APP}
+
 CMD ["./pachtop-update-server"]
