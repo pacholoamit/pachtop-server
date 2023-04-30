@@ -23,7 +23,25 @@
 <br/>
 <br/>
 
->This is the update server for Pachtop. This server is responsible for checking for updates and downloading the latest version of Pachtop.
+> This is the update server for Pachtop. This server is responsible for checking for updates and downloading the latest version of Pachtop.
 
+## Usage:
 
+For the best experience use `docker-compose` to set up the update server.
 
+1. Create a `docker-compose.yml` file with the following contents:
+
+```yml
+version: "3.3"
+services:
+  pachtop-update-server:
+    image: ghcr.io/pacholoamit/pachtop-update-server:latest
+    container_name: pachtop-update-server
+    restart: always
+    ports:
+      - 5000:5000
+```
+
+2. Run `docker-compose up -d` to start the update server.
+
+3. If you visit `http://localhost:5000/releases/pachtop/darwin-x86_64/3.0.3`, you should receive a JSON response that allows Pachtop to be updated
