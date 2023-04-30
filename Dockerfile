@@ -1,4 +1,4 @@
-FROM rust:1.43 as builder
+FROM rust:1.69 as builder
 
 RUN USER=root cargo new --bin pachtop-update-server
 WORKDIR ./pachtop-update-server
@@ -8,7 +8,7 @@ RUN rm src/*.rs
 
 ADD . ./
 
-RUN rm ./target/release/deps/rust_docker_web*
+RUN rm ./target/release/deps/pachtop-update-server*
 RUN cargo build --release
 
 
