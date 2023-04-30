@@ -39,7 +39,7 @@ services:
     container_name: pachtop-update-server
     restart: always
     ports:
-      - 5000:5000
+      - 8000:8000
 ```
 
 2. Run `docker-compose up -d` to start the update server.
