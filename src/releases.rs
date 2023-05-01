@@ -61,7 +61,13 @@ async fn create_tauri_response(client: &State<Client>, github_release: &Value) -
 
     let mut response = json!({
         "version": github_release["tag_name"].as_str()?,
-        "notes": remove_suffix(github_release["body"].as_str()?, "See the assets to download this version and install.").trim_end_matches(['\r', '\n', ' ']),
+        "notes": markdown_to_text::convert(
+        remove_suffix(
+            github_release["body"].as_str()?,
+            "See the assets to download this version and install.",
+        )
+        .trim_end_matches(['\r', '\n', ' ']),
+    ),
         "pub_date": github_release["published_at"].as_str()?,
         "platforms": {}
     });
