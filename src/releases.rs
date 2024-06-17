@@ -55,8 +55,11 @@ pub fn routes() -> Vec<Route> {
 async fn create_tauri_response(client: &State<Client>, github_release: &Value) -> Option<Value> {
     let platforms_available: HashMap<&str, Vec<&str>> = HashMap::from([
         ("amd64.AppImage.tar.gz", vec!["linux-x86_64"]),
-        ("app.tar.gz", vec!["darwin-x86_64", "darwin-aarch64"]),
-        ("x64_en-US.msi.zip", vec!["windows-x86_64"]),
+        (
+            "universal.app.tar.gz",
+            vec!["darwin-x86_64", "darwin-aarch64"],
+        ),
+        ("x64-setup.nsis.zip", vec!["windows-x86_64"]),
     ]);
 
     let mut response = json!({
