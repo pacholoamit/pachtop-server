@@ -111,10 +111,12 @@ async fn get_latest_release(client: &State<Client>, repo: &str) -> Result<Value,
     let url = format!("https://api.github.com/repos/{repo}/releases/latest");
     let response = client.get(&url).send().await?;
     let github_release = response.json::<Value>().await?;
-    create_tauri_response(client, &github_release)
-        .await
-        .ok_or(json!({}))
-        .or_else(Ok)
+
+    Ok(github_release)
+    // create_tauri_response(client, &github_release)
+    //     .await
+    //     .ok_or(json!({}))
+    //     .or_else(Ok)
 }
 
 async fn get_latest_release_ttl(
